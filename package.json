@@ -1,0 +1,33 @@
+{
+  "name": "proverbs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "test": "node --env-file=.env.test bin/test.js unit --bail"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "ajv-formats": "^3.0.1",
+    "express": "^4.21.2",
+    "express-json-validator-middleware": "^3.0.1",
+    "mongodb": "^6.16.0",
+    "pino": "^9.6.0",
+    "pino-http": "^10.4.0",
+    "pino-pretty": "^13.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "@japa/api-client": "^3.0.4",
+    "@japa/expect": "^3.0.3",
+    "@japa/runner": "^4.2.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0"
+  }
+}
