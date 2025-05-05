@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "backupdb:test": "node --env-file=.env.test ./scripts/backupdb.js",
+    "restoredb:test": "node --env-file=.env.test ./scripts/restoredb.js",
+    "backupdb:prod": "node --env-file=.env.production ./scripts/backupdb.js",
+    "restoredb:prod": "node --env-file=.env.production ./scripts/restoredb.js",
     "dev": "node --watch --env-file=.env.development ./src/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
