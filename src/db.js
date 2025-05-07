@@ -16,9 +16,9 @@ export function getMongoClient(options = { cnf: getConfig(), log: getLogger() })
       }
       if (!client?.topology?.isConnected()) {
         await client.connect();
+        log.info("MongoDB connected");
       }
       if (!db) db = client.db(cnf.DB_NAME);
-      log.info("MongoClient connected");
     } catch (err) {
       log.error(err, "MongoDB connection error:");
       throw err;

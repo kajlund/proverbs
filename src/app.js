@@ -6,7 +6,8 @@ import httpLogger from "pino-http";
 import { NotFoundError } from "./errors.js";
 import { errorHandler } from "./middleware/errorhandler.js";
 import { getMongoClient } from "./db.js";
-import { getRoutes } from "./api/routes.js";
+import { getRootRoutes } from "./api/root.routes.js";
+import { getProverbRoutes } from "./api/proverbs/proverb.routes.js";
 
 class App {
   constructor(cnf, log, db) {
@@ -61,7 +62,7 @@ class App {
     this.#setupMiddleware();
 
     // Initialize routes
-    this.#attachRoutes([getRoutes()]);
+    this.#attachRoutes([getRootRoutes(), getProverbRoutes()]);
   }
 
   async start() {

@@ -1,5 +1,4 @@
-export function getRoutes() {
-
+export function getRootRoutes() {
   return {
     group: {
       prefix: "",
@@ -21,5 +20,4 @@ export function getRoutes() {
       },
     ],
   };
-
 }

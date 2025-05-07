@@ -1,6 +1,7 @@
 import { ObjectId } from "mongodb";
+import { BSON } from 'bson';
 
-import { getLogger } from "../logger.js";
+import { getLogger } from "./logger.js";
 import { getMongoClient } from "./db.js";
 
 const client = getMongoClient();
@@ -13,32 +14,47 @@ async function getCollection(name) {
 export function getDAO(collectionName) {
   const log = getLogger();
 
+  async function findById(id) {
+    log.debug(`dao.findById from ${collectionName} with _id: ${id}`);
+    const coll = await getCollection(collectionName);
+
+    let objId = id;
+    if (typeof objId === 'string') objId = ObjectId.createFromHexString(id);
+    const result = await coll.findOne({ _id: objId });
+    return result; // Return found document or null
+  }
+
   return {
+    count: async (qry = {}) => {
+      const coll = await getCollection(collectionName);
+      const cnt = await coll.countDocuments(qry); 
+      return cnt;
+    },
     createOne: async (data) => {
-      // if (!data.createdAt) data.createdAt = new Date().toISOString();
-      // if (!data.updatedAt) data.updatedAt = data.createdAt;
-      log.debug(data, `Creating doc in ${collectionName}:`);
+      const timestamp = new Date().toISOString();
+      if (!data.createdAt) data.createdAt = timestamp;
+      if (!data.updatedAt) data.updatedAt = timestamp;
+      log.debug(data, `dao.createOne in ${collectionName}:`);
       const coll = await getCollection(collectionName);
       const result = await coll.insertOne(data);
+      log.info(result, "Created");
       if (!result.acknowledged) return null;
-      const found = await coll.findOne({ _id: result.insertedId });
-      log.info(found, "Created");
+      const found = await findById(result.insertedId);
       return found;
     },
     deleteOne: async (id) => {
-      log.debug(`Deleting doc in ${collectionName} with id ${id}`);
+      log.debug(`dao.deleteOne from ${collectionName} with id ${id}`);
       const coll = await getCollection(collectionName);
+      const found = await findById(id);
+      if (!found) return null;
       const result = await coll.deleteOne({ _id: ObjectId.createFromHexString(id) });
-      return result.deletedCount > 0; // Return true if deleted
+      log.debug(result, "Deleted");
+      if (result.deletedCount > 0) return found;
+      return null;
     },
-    findById: async (id) => {
-      log.debug(`Finding doc in ${collectionName} with id ${id}`);
-      const coll = await getCollection(collectionName);
-      const result = await coll.findOne({ _id: ObjectId.createFromHexString(id) });
-      return result; // Return found document or null
-    },
+    findById,
     findOne: async (query) => {
-      log.debug(query, `Finding doc in ${collectionName} with query:`);
+      log.debug(query, `dao.findOne in ${collectionName} with query:`);
       const coll = await getCollection(collectionName);
       const result = await coll.findOne(query);
       return result; // Return found document or null
@@ -49,7 +65,7 @@ export function getDAO(collectionName) {
       // how to handle filter, sort, limit, skip
       const result = [];
       const coll = await getCollection(collectionName);
-      log.debug(query, `Finding docs in ${collectionName} with query:`);
+      log.debug(query, `dao.findMany in ${collectionName} with query:`);
       const cursor = coll.find(query);
       while (await cursor.hasNext()) {
         const doc = await cursor.next();
@@ -58,11 +74,16 @@ export function getDAO(collectionName) {
       return result; // Return found documents or empty array
     },
     updateOne: async (id, data) => {
-      // data.updatedAt = new Date().toISOString();
-      log.debug(data, `Updating doc in ${collectionName} with id ${id}:`);
+      data.updatedAt = new Date().toISOString();
+      log.debug(data, `dao.updateOne in ${collectionName} with id ${id}:`);
       const coll = await getCollection(collectionName);
       const result = await coll.updateOne({ _id: ObjectId.createFromHexString(id) }, { $set: data });
-      return result.modifiedCount > 0; // Return true if updated
+      log.debug(result, "Updated");
+      if (result.modifiedCount > 0) {
+        const updated = await findById(id);
+        return updated;
+      }
+      return null;
     },
   };
 }
