@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname } from "node:path";
 import path from "node:path";
 
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import pino from "pino";
 
 const log = pino({
@@ -23,6 +23,15 @@ const basePath = path.join(dirname(new URL(import.meta.url).pathname), "data");
 log.info(`Data folder: ${basePath}`);
 
 const proverbsData = JSON.parse(readFileSync(path.join(basePath, "proverbs.json")));
+proverbsData.forEach((proverb) => {
+  let newId;
+  try {
+    newId = ObjectId.createFromHexString(proverb._id);
+  } catch (err) {
+    log.error(err);
+  }
+  proverb._id = newId;
+});
 
 const uri = process.env.DB_URI;
 const client = new MongoClient(uri);
