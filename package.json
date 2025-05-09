@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "testserver": "node --env-file=.env.test ./src/server.js",
-    "test:e2e": "node bin/test.js e2e --bail",
+    "test:e2e": "node --env-file=.env.test bin/test.js e2e --bail",
     "test": "node --env-file=.env.test bin/test.js unit --bail"
   },
   "keywords": [],
