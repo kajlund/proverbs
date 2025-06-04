@@ -2,6 +2,7 @@ import path from "node:path";
 
 import express from "express";
 import httpLogger from "pino-http";
+import cors from "cors";
 
 import { NotFoundError } from "./errors.js";
 import { errorHandler } from "./middleware/errorhandler.js";
@@ -41,6 +42,19 @@ class App {
     this.app.use(express.urlencoded({ extended: false }));
     // Serve public
     // this.app.use(express.static(path.join(process.cwd(), "public")));
+    // const whitelist = ['http://localhost:8080' /** other domains if any */]
+    // const corsOptions = {
+    //   credentials: true,
+    //   origin: function (origin, callback) {
+    //     if (whitelist.indexOf(origin) !== -1) {
+    //       callback(null, true)
+    //     } else {
+    //       callback(new Error('Not allowed by CORS'))
+    //     }
+    //   },
+    // }
+    this.app.use(cors({ credentials: true, exposedHeaders: ['set-cookie'] }));
+      
     if (this.cnf.LOG_HTTP) {
       this.app.use(httpLogger({ logger: this.log }));
     }
