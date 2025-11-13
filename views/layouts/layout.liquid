@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon.ico">
+  <title>LuKa - {{title}}</title>
+  <!-- Remix icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/app.css">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% include 'messages', messages: messages %}
+  {% include 'header', page: page %}
+
+  <main>
+    {% block %}{% endblock %}
+  </main>
+  <script type="text/javascript" src="/js/main.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
