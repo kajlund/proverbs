@@ -1,10 +1,12 @@
 import express from 'express';
 
 import { getRootRoutes } from './root.routes.js';
+import { getAuthorRoutes } from './author.routes.js';
 
 export function getRouter(cnf, log) {
   const rootRoutes = getRootRoutes();
-  const groups = [rootRoutes];
+  const authorRoutes = getAuthorRoutes(cnf, log);
+  const groups = [rootRoutes, authorRoutes];
   const router = express.Router();
 
   groups.forEach(({ group, routes }) => {
