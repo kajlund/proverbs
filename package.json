@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node --watch --env-file=.env.development ./src/index.js",
     "start": "node ./src/index.js",
+    "db:import": "node --env-file=.env.development ./scripts/import.js",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
   },

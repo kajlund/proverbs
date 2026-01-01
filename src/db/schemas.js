@@ -16,7 +16,7 @@ export const authors = sqliteTable('authors', {
   id: text()
     .primaryKey()
     .$defaultFn(() => createId()),
-  authorName: text('aut_name').notNull().unique(),
+  name: text('aut_name').notNull().unique(),
   ...timestamps,
 });
 

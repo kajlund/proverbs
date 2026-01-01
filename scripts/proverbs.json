@@ -1,0 +1,907 @@
+[
+  {
+    "_id": {
+      "$oid": "679a77438e3bed09ba2ac3e9"
+    },
+    "title": "Civilization",
+    "author": "Emile Zola",
+    "content": "Civilization will not attain perfection until the last stone, from the last church, falls on the last priest.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "civilization"
+    ],
+    "createdAt": "2025-01-29T18:45:23.527Z",
+    "updatedAt": "2025-01-29T18:45:23.527Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a2de52677f6d72d80ea72"
+    },
+    "title": "Community",
+    "author": "Joshua Bloch",
+    "content": "When you choose a language, you're choosing more than a set of technical trade-offs - You're choosing a community.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "community"
+    ],
+    "createdAt": "2025-01-25T19:53:37.581Z",
+    "updatedAt": "2025-01-25T19:53:37.581Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a58052677f6d72d80ea74"
+    },
+    "title": "Throwing Code",
+    "author": "Ken Thompson",
+    "content": "One of my most productive days was throwing away 1,000 lines of code.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "productivity"
+    ],
+    "createdAt": "2025-01-25T20:36:38.506Z",
+    "updatedAt": "2025-01-25T20:36:38.506Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a2d992677f6d72d80ea6c"
+    },
+    "title": "Understandable Code",
+    "author": "Martin Fowler",
+    "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "code"
+    ],
+    "createdAt": "2025-01-25T20:35:06.275Z",
+    "updatedAt": "2025-01-25T20:35:06.275Z"
+  },
+  {
+    "_id": {
+      "$oid": "6798fe4e1f5abee284c55487"
+    },
+    "title": "Every Village",
+    "author": "Victor Hugo",
+    "content": "There is in every village a torch: The schoolteacher and an extinguisher: The priest",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "torch",
+      "teacher",
+      "priest"
+    ],
+    "createdAt": "2025-01-28T15:57:02.158Z",
+    "updatedAt": "2025-01-28T15:57:02.158Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a76948e3bed09ba2ac3df"
+    },
+    "title": "Enough is Enough",
+    "author": "Richard Dawkins",
+    "content": "The time has come for people of reason to say: Enough is Enough! Religious faith discourages independent thought, it's divisive and it's dangerous.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "faith"
+    ],
+    "createdAt": "2025-01-29T18:42:28.328Z",
+    "updatedAt": "2025-01-29T18:42:28.328Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a7d138e3bed09ba2ac3fd"
+    },
+    "title": "In the Future",
+    "author": "Popular Mechanics",
+    "content": "Computers in the future may weigh no more than 1.5 tons.",
+    "description": "Forecasting the relentless march of science in 1949",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "computers"
+    ],
+    "createdAt": "2025-01-29T19:10:11.342Z",
+    "updatedAt": "2025-01-29T19:10:11.342Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a58b02677f6d72d80ea78"
+    },
+    "title": "Debugging",
+    "author": "Andrew Singer",
+    "content": "The art of debugging is figuring out what you really told your program to do rather than what you thought you told it to do.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "debugging"
+    ],
+    "createdAt": "2025-01-25T19:53:55.899Z",
+    "updatedAt": "2025-01-25T19:53:55.899Z"
+  },
+  {
+    "_id": {
+      "$oid": "6798ff571f5abee284c55497"
+    },
+    "title": "More Intelligent",
+    "author": "Robert Ingersoll",
+    "content": "As people become more intelligent, they care less for preachers and more for teachers.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "intelligence",
+      "teachers"
+    ],
+    "createdAt": "2025-01-28T16:01:27.449Z",
+    "updatedAt": "2025-01-30T17:13:28.411Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a458d8e3bed09ba2ac3a4"
+    },
+    "title": "Thinking Computers",
+    "author": "Edsger W. Dijkstra",
+    "content": "The question of whether computers can think is like the question of whether submarines can swim.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "computers",
+      "thinking"
+    ],
+    "createdAt": "2025-01-29T15:13:17.984Z",
+    "updatedAt": "2025-01-29T15:13:17.984Z"
+  },
+  {
+    "_id": {
+      "$oid": "6682d1987dfa23ae05040354"
+    },
+    "title": "Mystery Blanket",
+    "author": "Barry Taylor",
+    "content": "God is the blanket we throw over mystery to give it shape",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "god",
+      "mystery"
+    ],
+    "createdAt": "2024-07-01T15:56:08.497Z",
+    "updatedAt": "2025-01-25T20:38:10.844Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a2dce2677f6d72d80ea70"
+    },
+    "title": "Great Habits",
+    "author": "Kent Beck",
+    "content": "I’m not a great programmer. I’m just a good programmer with great habits.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "habits"
+    ],
+    "createdAt": "2025-01-25T20:31:47.014Z",
+    "updatedAt": "2025-01-25T20:31:47.014Z"
+  },
+  {
+    "_id": {
+      "$oid": "665ca8961bab4e12e68654aa"
+    },
+    "title": "Zero-Sum Game",
+    "author": "John Carmack",
+    "content": "Programming is not a zero-sum game. Teaching something to a fellow programmer doesn't take it away from you. I'm happy to share what I can, because I'm in it for the love of programming.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "programming",
+      "teaching"
+    ],
+    "createdAt": "2024-06-02T17:15:02.094Z",
+    "updatedAt": "2025-01-25T20:32:16.876Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a43a88e3bed09ba2ac37e"
+    },
+    "title": "Less Examined",
+    "author": "Thomas Paine",
+    "content": "The bible is a book that has been read more, and examined less, than any book that ever existed.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "bible"
+    ],
+    "createdAt": "2025-01-29T15:05:12.649Z",
+    "updatedAt": "2025-01-29T15:05:12.649Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a7fd78e3bed09ba2ac417"
+    },
+    "title": "No Coincidence",
+    "author": "Jeremy S. Anderson",
+    "content": "There are two major products that come out of Berkeley: LSD and UNIX. We don’t believe this to be a coincidence.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "os",
+      "unix"
+    ],
+    "createdAt": "2025-01-29T19:21:59.675Z",
+    "updatedAt": "2025-01-29T19:21:59.675Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bb2948e3bed09ba2ac45d"
+    },
+    "title": "Absurdities",
+    "author": "Voltaire",
+    "content": "Those who can make you believe absurdities can make you commit artrocities",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "belief"
+    ],
+    "createdAt": "2025-01-30T17:10:44.509Z",
+    "updatedAt": "2025-02-08T13:19:12.029Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bba2b8e3bed09ba2ac4ab"
+    },
+    "title": "World Market",
+    "author": "Thomas Watson",
+    "content": "I think there is a world market for maybe five computers.",
+    "description": "Thomas Watson, chairman of IBM, 1943",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "computers",
+      "demand"
+    ],
+    "createdAt": "2025-01-30T17:43:07.700Z",
+    "updatedAt": "2025-01-30T17:43:07.700Z"
+  },
+  {
+    "_id": {
+      "$oid": "6682d3417dfa23ae0504036f"
+    },
+    "title": "Happiness",
+    "author": "Anne (After Life)",
+    "content": "Happiness is amazing! It's so amazing it doesn't matter if it's yours or not.",
+    "description": "",
+    "lang": "eng",
+    "category": "Misc.",
+    "tags": [
+      "happiness"
+    ],
+    "createdAt": "2024-07-01T16:03:13.768Z",
+    "updatedAt": "2025-01-25T19:50:00.388Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a58e52677f6d72d80ea7c"
+    },
+    "title": "Requirements",
+    "author": "Sam Saccone",
+    "content": "99.7% of software development in one requirement. A user should be able to view a list of items.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "requirements"
+    ],
+    "createdAt": "2025-01-25T20:35:14.087Z",
+    "updatedAt": "2025-01-25T20:35:14.087Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a2db82677f6d72d80ea6e"
+    },
+    "title": "Divide and Conquer",
+    "author": "Bjarne Stroustrup",
+    "content": "The most fundamental problem in software development is complexity. There is only one basic way of dealing with complexity: divide and conquer",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "development",
+      "complexity"
+    ],
+    "createdAt": "2025-01-25T19:54:20.160Z",
+    "updatedAt": "2025-01-25T19:54:20.160Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bb19a8e3bed09ba2ac448"
+    },
+    "title": "Fear vs Courage",
+    "author": "Robert Ingersoll",
+    "content": "Fear believes — courage doubts. Fear falls upon the earth and prays — courage stands erect and thinks. Fear retreats — courage advances. Fear is barbarism — courage is civilization. Fear believes in witchcraft, in devils and in ghosts. Fear is religion, courage is science.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "science"
+    ],
+    "createdAt": "2025-01-30T17:06:34.351Z",
+    "updatedAt": "2025-01-30T17:06:34.351Z"
+  },
+  {
+    "_id": {
+      "$oid": "679553110362803ffbda4a1f"
+    },
+    "title": "Intelligence",
+    "author": "Bertrand Russell",
+    "content": "So far as I can remember, there’s not one word in the Gospels in praise of intelligence.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "gospels",
+      "intelligence"
+    ],
+    "createdAt": "2025-01-25T21:09:37.665Z",
+    "updatedAt": "2025-01-25T21:09:37.665Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bb8098e3bed09ba2ac48a"
+    },
+    "title": "A fad",
+    "author": "Prentice Hall",
+    "content": "I have traveled the length and breadth of this country and talked with the best people, and I can assure you that data processing is a fad that won't last out the year.",
+    "description": "The editor in charge of business books for Prentice Hall, 1957",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "fad"
+    ],
+    "createdAt": "2025-01-30T17:34:01.998Z",
+    "updatedAt": "2025-01-30T17:34:01.998Z"
+  },
+  {
+    "_id": {
+      "$oid": "665e1038d158d96b5ae8f33c"
+    },
+    "title": "Natural Resource",
+    "author": "Alan Kay",
+    "content": "The Internet was done so well that most people think of it as a natural resource like the Pacific Ocean, rather than something that was man-made. When was the last time a technology with a scale like that was so error-free?",
+    "description": "Dr Dobb’s Journal (2012)",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "technology"
+    ],
+    "createdAt": "2024-06-03T18:49:28.925Z",
+    "updatedAt": "2025-01-25T20:32:03.912Z"
+  },
+  {
+    "_id": {
+      "$oid": "6682d2d77dfa23ae05040366"
+    },
+    "title": "Meaning of Life",
+    "author": "Unknown",
+    "content": "The realization that you were not created with a purpose does not mean your life has no meaning. It just means you get to find your own.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "purpose",
+      "meaning"
+    ],
+    "createdAt": "2024-07-01T16:01:27.579Z",
+    "updatedAt": "2025-01-25T19:50:30.100Z"
+  },
+  {
+    "_id": {
+      "$oid": "67b4896e4f5252266dab1fbe"
+    },
+    "title": "Basis for morality",
+    "author": "Frank Herbert",
+    "content": "Respect for the truth comes close to being the basis for all morality.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "truth",
+      "morality"
+    ],
+    "createdAt": "2025-02-18T13:21:50.238Z",
+    "updatedAt": "2025-02-18T13:21:50.238Z"
+  },
+  {
+    "_id": {
+      "$oid": "679babb18e3bed09ba2ac431"
+    },
+    "title": "Berömdheter",
+    "author": "Vilhelm Moberg",
+    "content": "Av intet skapade Gud världen. TV tillverkar berömdheter av samma material.",
+    "description": "",
+    "lang": "swe",
+    "category": "Misc.",
+    "tags": [
+      "misc",
+      "moberg",
+      "celebrities"
+    ],
+    "createdAt": "2025-01-30T16:41:21.839Z",
+    "updatedAt": "2025-01-30T16:41:21.839Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a444a8e3bed09ba2ac38a"
+    },
+    "title": "Stärk det goda",
+    "author": "Zarathustra",
+    "content": "Den som stärker det goda, var han än finner det, uträttar ett verkligt arbete på jorden.",
+    "description": "",
+    "lang": "swe",
+    "category": "Misc.",
+    "tags": [
+      "misc",
+      "goodness"
+    ],
+    "createdAt": "2025-01-29T15:07:54.489Z",
+    "updatedAt": "2025-01-29T15:07:54.489Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a80888e3bed09ba2ac421"
+    },
+    "title": "Good Code",
+    "author": "Steve McConnell",
+    "content": "Good code is its own best documentation.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "code",
+      "documentation"
+    ],
+    "createdAt": "2025-01-29T19:24:56.500Z",
+    "updatedAt": "2025-01-29T19:24:56.500Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bbb6a8e3bed09ba2ac4bb"
+    },
+    "title": "Father of Knowledge",
+    "author": "Hippocrates",
+    "content": "Science is the father of knowledge, but opinion breeds ignorance.",
+    "description": "",
+    "lang": "eng",
+    "category": "Science",
+    "tags": [
+      "science",
+      "knowledge"
+    ],
+    "createdAt": "2025-01-30T17:48:26.933Z",
+    "updatedAt": "2025-01-30T17:48:26.933Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a48ed8e3bed09ba2ac3c2"
+    },
+    "title": "Virtuous Men",
+    "author": "Bertrand Russell",
+    "content": "One is often told that it is a very wrong thing to attack religion, because religion makes men virtuous. So I am told; I have not noticed it.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "virtuous"
+    ],
+    "createdAt": "2025-01-29T15:27:41.261Z",
+    "updatedAt": "2025-01-29T15:27:41.261Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bb5e18e3bed09ba2ac480"
+    },
+    "title": "Being Offensive",
+    "author": "Linus Torvalds",
+    "content": "I like being outrageous at times. I like offending people because I think people who get offended should be offended.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "torvalds"
+    ],
+    "createdAt": "2025-01-30T17:24:49.737Z",
+    "updatedAt": "2025-01-31T13:45:22.925Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a469d8e3bed09ba2ac3ae"
+    },
+    "title": "Bad Reasoning",
+    "author": "Sam Harris",
+    "content": "Religion has made bad reasoning into an art form.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "reasoning"
+    ],
+    "createdAt": "2025-01-29T15:17:49.221Z",
+    "updatedAt": "2025-01-29T15:17:49.221Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bbdaf8e3bed09ba2ac4d5"
+    },
+    "title": "Claims vs Evidence",
+    "author": "Carl Sagan",
+    "content": "Extraordinary claims require extraordinary evidence",
+    "description": "",
+    "lang": "eng",
+    "category": "Science",
+    "tags": [
+      "science",
+      "evidence",
+      "sagan"
+    ],
+    "createdAt": "2025-01-30T17:58:07.708Z",
+    "updatedAt": "2025-01-30T17:58:07.708Z"
+  },
+  {
+    "_id": {
+      "$oid": "679cde612d9adf6b9a6cfa83"
+    },
+    "title": "Force for Atheism",
+    "author": "Isaac Asimov",
+    "content": "Properly read, the bible is the most potent force for atheism ever conceived.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "bible",
+      "atheism"
+    ],
+    "createdAt": "2025-01-31T14:29:53.074Z",
+    "updatedAt": "2025-01-31T14:29:53.074Z"
+  },
+  {
+    "_id": {
+      "$oid": "6682d23b7dfa23ae0504035d"
+    },
+    "title": "Data",
+    "author": "Gary Schubert & Cliff Stoll",
+    "content": "Data is not information. Information is not knowledge. Knowledge is not understanding. Understanding is not wisdom.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "data",
+      "information",
+      "knowledge"
+    ],
+    "createdAt": "2024-07-01T15:58:51.067Z",
+    "updatedAt": "2025-01-31T13:44:19.490Z"
+  },
+  {
+    "_id": {
+      "$oid": "679cdfac2d9adf6b9a6cfaa8"
+    },
+    "title": "Fear Death?",
+    "author": "Epicurus",
+    "content": "Why should I fear death? If I am, death is not.If death is, I am not. Why should I fear that which cannot exist when I do?",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "fear",
+      "death",
+      "epicurus"
+    ],
+    "createdAt": "2025-01-31T14:35:24.928Z",
+    "updatedAt": "2025-01-31T14:36:27.819Z"
+  },
+  {
+    "_id": {
+      "$oid": "67b6b3ca4f5252266dab1fe9"
+    },
+    "title": "Ony Excuse",
+    "author": "Frederich Nietzsche",
+    "content": "Stendahl robbed me of the best atheist joke which precisely I could have made: God's only excuse is that he does not exist.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "god"
+    ],
+    "createdAt": "2025-02-20T04:47:06.568Z",
+    "updatedAt": "2025-02-20T04:47:06.568Z"
+  },
+  {
+    "_id": {
+      "$oid": "6798feec1f5abee284c5548f"
+    },
+    "title": "Problem of Evil",
+    "author": "Epicurus",
+    "content": "Is God willing to prevent evil, but not able? Then he is not omnipotent. Is he able, but not willing? Then he is malevolent. Is he both able and willing? Then whence cometh evil? Is he neither able nor willing? Then why call him God?",
+    "description": "Riddle of Epicurus",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "evil",
+      "epicurus"
+    ],
+    "createdAt": "2025-01-28T15:59:40.089Z",
+    "updatedAt": "2025-01-28T15:59:40.089Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a44ef8e3bed09ba2ac394"
+    },
+    "title": "Easy Confidence",
+    "author": "Mark Twain",
+    "content": "The easy confidence with which I know another man's religion is folly teaches me to suspect that my own is also",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      "folly"
+    ],
+    "createdAt": "2025-01-29T15:10:39.434Z",
+    "updatedAt": "2025-01-31T13:41:40.758Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a47c18e3bed09ba2ac3b8"
+    },
+    "title": "Livet",
+    "author": "Lennart Hagefors",
+    "content": "Livet är det som pågår medan vi sysslar med annat.",
+    "description": "",
+    "lang": "swe",
+    "category": "Misc.",
+    "tags": [
+      "misc",
+      "life"
+    ],
+    "createdAt": "2025-01-29T15:22:41.927Z",
+    "updatedAt": "2025-01-29T15:22:41.927Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a58cf2677f6d72d80ea7a"
+    },
+    "title": "Simplicity",
+    "author": "Tony Hoare",
+    "content": "There are two methods of software design. One is to make the program so simple, there are obviously no errors. The other is to make it so complicated, there are no obvious errors.",
+    "description": "Inventor of the quicksort algorithm",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "complexity"
+    ],
+    "createdAt": "2025-01-25T20:36:03.645Z",
+    "updatedAt": "2025-01-25T20:36:03.645Z"
+  },
+  {
+    "_id": {
+      "$oid": "668e819babefa7ab120248d1"
+    },
+    "title": "Eliminating Fear",
+    "author": "Eric Elliott",
+    "content": "TDD eliminates fear of the merge button. That reassuring coverage number gives your whole team the confidence to stop gatekeeping every little change to the codebase and let changes thrive. Removing fear of change is like oiling a machine.",
+    "description": "From TDD Changed My Life",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "tdd",
+      "testing",
+      "fear"
+    ],
+    "createdAt": "2024-07-10T12:42:03.024Z",
+    "updatedAt": "2025-01-31T13:44:44.076Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a7c388e3bed09ba2ac3f3"
+    },
+    "title": "Programmer Virtues",
+    "author": "Larry Wall",
+    "content": "Most of you are familiar with the virtues of a programmer. There are three, of course: laziness, impatience, and hubris.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "virtues"
+    ],
+    "createdAt": "2025-01-29T19:06:32.728Z",
+    "updatedAt": "2025-01-31T13:43:24.064Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a7db08e3bed09ba2ac407"
+    },
+    "title": "Software Today",
+    "author": "Alan Kay",
+    "content": "Most software today is very much like an Egyptian pyramid with millions of bricks piled on top of each other, with no structural integrity, but just done by brute force and thousands of slaves.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "software"
+    ],
+    "createdAt": "2025-01-29T19:12:48.962Z",
+    "updatedAt": "2025-01-29T19:12:48.962Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a2d792677f6d72d80ea6a"
+    },
+    "title": "Programming",
+    "author": "Chris Pine",
+    "content": "Programming isn’t about what you know; it’s about what you can figure out.",
+    "description": "Author of Learn to Program",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "learning"
+    ],
+    "createdAt": "2025-01-25T20:36:48.473Z",
+    "updatedAt": "2025-01-25T20:36:48.473Z"
+  },
+  {
+    "_id": {
+      "$oid": "663a58412677f6d72d80ea76"
+    },
+    "title": "Development Time",
+    "author": "Tom Cargill",
+    "content": "The first 90% of the code accounts for the first 90% of the development time. The remaining 10% of the code accounts for the other 90% of the development time.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming",
+      "time"
+    ],
+    "createdAt": "2025-01-25T19:54:04.467Z",
+    "updatedAt": "2025-01-25T19:54:04.467Z"
+  },
+  {
+    "_id": {
+      "$oid": "6798fc3f1f5abee284c55469"
+    },
+    "title": "Belief",
+    "author": "Isaac Asimov",
+    "content": "Imagine the people who believe such things and who are not ashamed to ignore, totally, all the patient findings of thinking minds through all the centuries since the Bible was written. And it is these ignorant people, the most uneducated, the most unimaginative, the most unthinking among us, who would make themselves the guides and leaders of us all; who would force their feeble and childish beliefs on us; who would invade our schools and libraries and homes. I personally resent it bitterly.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "belief",
+      "bible"
+    ],
+    "createdAt": "2025-01-28T15:48:15.353Z",
+    "updatedAt": "2025-01-31T14:30:58.981Z"
+  },
+  {
+    "_id": {
+      "$oid": "679a74c78e3bed09ba2ac3cc"
+    },
+    "title": "Floating Point Arithmetic",
+    "author": "Tom Scott",
+    "content": "Some programmers, when confronted with a problem, think \"I know, I'll use floating point arithmetic.\" Now they have 1.999999999997 problems.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "programming"
+    ],
+    "createdAt": "2025-01-29T18:34:47.974Z",
+    "updatedAt": "2025-01-31T13:43:42.872Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bbd0c8e3bed09ba2ac4c8"
+    },
+    "title": "Patents",
+    "author": "Linus Torvalds",
+    "content": "The bulk of all patents are crap. Spending time reading them is stupid. It’s up to the patent owner to do so, and to enforce them.",
+    "description": "",
+    "lang": "eng",
+    "category": "IT",
+    "tags": [
+      "it",
+      "patents",
+      "torvalds"
+    ],
+    "createdAt": "2025-01-30T17:55:24.835Z",
+    "updatedAt": "2025-01-30T17:55:24.835Z"
+  },
+  {
+    "_id": {
+      "$oid": "679bb0e18e3bed09ba2ac43e"
+    },
+    "title": "Civilized Man",
+    "author": "Robert Ingersoll",
+    "content": "Religion has not civilized man - man has civilized religion.",
+    "description": "",
+    "lang": "eng",
+    "category": "Secular",
+    "tags": [
+      "secular",
+      "religion",
+      ""
+    ],
+    "createdAt": "2025-01-30T17:03:29.889Z",
+    "updatedAt": "2025-01-30T17:03:29.889Z"
+  }
+]
