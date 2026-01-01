@@ -19,7 +19,7 @@ const configSchema = z.strictObject({
     .default('info'),
   logHttp: z.coerce.boolean().optional().default(false),
   dbUrl: z.string().trim(),
-  dbAuthToken: z.string().trim(),
+  dbAuthToken: z.string().trim().optional().default(''),
   corsOrigin: z.array(z.string()).optional().default(['http://localhost:3005']),
 });
 
@@ -29,8 +29,8 @@ function getEnvConfig() {
     port: process.env.PORT,
     logLevel: process.env.LOG_LEVEL,
     logHttp: process.env.LOG_HTTP,
-    dbUrl: process.env.TURSO_DATABASE_URL,
-    dbAuthToken: process.env.TURSO_AUTH_TOKEN,
+    dbUrl: process.env.DATABASE_URL,
+    dbAuthToken: process.env.DATABASE_AUTH_TOKEN,
     corsOrigin: process.env.CORS_ORIGIN?.split(','),
   };
 }

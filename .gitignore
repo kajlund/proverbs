@@ -4,7 +4,4 @@
 .DS_Store
 *.log
 node_modules/
-*.db*
-data/
-
 coverage/
