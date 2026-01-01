@@ -8,6 +8,10 @@ export const authorSchema = z.strictObject({
   name: z.string().trim().min(2),
 });
 
+export const categorySchema = z.strictObject({
+  name: z.string().trim().min(2),
+});
+
 export const proverbSchema = z.strictObject({
   title: z.string().trim().optional(),
   authorId: cuidSchema,

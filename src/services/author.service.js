@@ -13,7 +13,7 @@ export const getAuthorService = (cnf, log) => {
       // Check duplicate
       const author = await dao.findByName(payload.name);
       if (author)
-        throw new ConflictError(`Author ${payload.name} is already exists`);
+        throw new ConflictError(`Author ${payload.name} already exists`);
 
       const created = await dao.create(payload);
       if (!created)
