@@ -1,4 +1,4 @@
-import { NotFoundError } from '../errors.js';
+import { NotFoundError } from '../utils/api.error.js';
 
 export function getNotFoundHandler() {
   return (req, res, next) => {

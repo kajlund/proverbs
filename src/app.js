@@ -1,17 +1,13 @@
-import path from 'node:path';
-
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
-import flash from 'express-flash';
+
 import { rateLimit } from 'express-rate-limit';
-import sessions from 'express-session';
-import { Liquid } from 'liquidjs';
 import httpLogger from 'pino-http';
 
-import { getRouter } from './router.js';
-import { getErrorHandler } from './middleware/errorhandler.js';
-import { getNotFoundHandler } from './middleware/notfoundhandler.js';
-
-const oneDay = 1000 * 60 * 60 * 24;
+import { getRouter } from './routes/index.js';
+import { getErrorHandler } from './middleware/error.handler.js';
+import { getNotFoundHandler } from './middleware/notfound.handler.js';
 
 export function getApp(cnf, log) {
   const app = express();
@@ -19,8 +15,18 @@ export function getApp(cnf, log) {
   // Add middleware
   app.disable('x-powered-by');
   app.set('trust proxy', 1); // trust first proxy
-  app.use(express.json({ limit: '1000kb' }));
+  app.use(express.json({ limit: '100kb' }));
   app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(
+    cors({
+      origin: cnf.corsOrigin,
+      credentials: true,
+      methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Accept', 'Content-Type', 'Authorization'],
+      exposedHeaders: ['set-cookie'],
+    }),
+  );
 
   const limiter = rateLimit({
     windowMs: 5 * 60 * 1000, // 5 minutes
@@ -37,35 +43,8 @@ export function getApp(cnf, log) {
     app.use(httpLogger({ logger: log }));
   }
 
-  // Session handling
-  app.use(
-    sessions({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: true,
-      cookie: {
-        maxAge: oneDay,
-        secure: 'auto',
-      },
-    }),
-  );
-
-  app.use(flash());
-
-  // Set view engine
-  const engine = new Liquid({
-    cache: process.env.NODE_ENV !== 'development',
-    root: path.join(process.cwd(), 'views'),
-    layouts: path.join(process.cwd(), 'views/layouts'),
-    partials: path.join(process.cwd(), 'views/partials'),
-    extname: '.liquid',
-  });
-
-  app.engine('liquid', engine.express()); // register liquid engine
-  app.set('view engine', 'liquid'); // set as default
-
   // Add routes
-  app.use(getRouter(log));
+  app.use(getRouter(cnf, log));
 
   // Add 404 handler
   app.use(getNotFoundHandler());

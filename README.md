@@ -1,3 +1,3 @@
 # Proverbs
 
-The proverbs demo app is a simple server-rendered app built on Node.js/Express + MongoDB using Liquid.js templating.
+The proverbs app is a simple REST API built on Node.js/Express + Drizzle ORM.
