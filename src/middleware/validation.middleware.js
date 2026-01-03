@@ -17,7 +17,7 @@ export const proverbSchema = z.strictObject({
   authorId: cuidSchema,
   content: z.string().trim().min(5),
   description: z.string().trim().optional(),
-  lang: z.string().min(3).max(3),
+  lang: z.enum(['eng', 'swe', 'fin']),
   categoryId: cuidSchema,
   tags: z.string().trim().optional(),
 });

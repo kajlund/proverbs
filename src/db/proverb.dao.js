@@ -1,82 +1,81 @@
-import { eq } from 'drizzle-orm';
+import { desc, eq } from 'drizzle-orm';
 
 import db from './index.js';
-import { users } from './schemas.js';
+import { authors, categories, proverbs } from './schemas.js';
 
-export function getUserDAO(log) {
+export function getProverbDAO(log) {
   return {
-    createUser: async function (data) {
+    create: async function (data) {
       const time = new Date();
       data.createdAt = time;
       data.updatedAt = time;
-      const [newUser] = await db.insert(users).values(data).returning();
-      log.debug(newUser, 'Created user');
-      return newUser;
+      const [newProverb] = await db.insert(proverbs).values(data).returning();
+      log.debug(newProverb, 'Created Proverb');
+      return newProverb;
     },
-    deleteUser: async function (id) {
+    destroy: async function (id) {
       const [deleted] = await db
-        .delete(users)
-        .where(eq(users.id, id))
+        .delete(proverbs)
+        .where(eq(proverbs.id, id))
         .returning();
-      log.debug(deleted, `Deleted activity by id ${id}`);
+      log.debug(deleted, `Deleted Proverb id ${id}`);
       return deleted;
     },
-    findUserByEmail: async function (email) {
+    findById: async function (id) {
       const [found] = await db
-        .select()
-        .from(users)
-        .where(eq(users.email, email))
+        .select({
+          id: proverbs.id,
+          title: proverbs.title,
+          authorId: proverbs.authorId,
+          author: authors.name,
+          content: proverbs.content,
+          description: proverbs.description,
+          lang: proverbs.lang,
+          categoryId: proverbs.categoryId,
+          category: categories.name,
+          tags: proverbs.tags,
+          createdAt: proverbs.createdAt,
+          updatedAt: proverbs.updatedAt,
+        })
+        .from(proverbs)
+        .innerJoin(authors, eq(proverbs.authorId, authors.id))
+        .innerJoin(categories, eq(proverbs.categoryId, categories.id))
+        .where(eq(proverbs.id, id))
         .limit(1);
-      log.debug(found, `Found user by email ${email}`);
+      log.debug(found, `Found Proverb id ${id}`);
       return found;
     },
-    findUserById: async function (id) {
-      const [found] = await db
-        .select()
-        .from(users)
-        .where(eq(users.id, id))
-        .limit(1);
-      log.debug(found, `Found user by id ${id}`);
-      return found;
-    },
-    findByForgotToken: async function (token) {
-      const [found] = await db
-        .select()
-        .from(users)
-        .where(eq(users.forgotToken, token))
-        .limit(1);
-      log.debug(found, `Found user by forgot password token ${token}`);
-      return found;
-    },
-    findByVerificationToken: async function (token) {
-      const [found] = await db
-        .select()
-        .from(users)
-        .where(eq(users.verificationToken, token))
-        .limit(1);
-      log.debug(found, `Found user by verification token ${token}`);
-      return found;
-    },
-    queryUsers: async function () {
+    query: async function () {
       const data = await db
         .select({
-          id: users.id,
-          alias: users.alias,
-          email: users.email,
-          role: users.role,
+          id: proverbs.id,
+          title: proverbs.title,
+          authorId: proverbs.authorId,
+          author: authors.name,
+          content: proverbs.content,
+          description: proverbs.description,
+          lang: proverbs.lang,
+          categoryId: proverbs.categoryId,
+          category: categories.name,
+          tags: proverbs.tags,
+          createdAt: proverbs.createdAt,
+          updatedAt: proverbs.updatedAt,
         })
-        .from(users);
-      log.debug(data, 'Found users');
+        .from(proverbs)
+        .innerJoin(authors, eq(proverbs.authorId, authors.id))
+        .innerJoin(categories, eq(proverbs.categoryId, categories.id))
+        .orderBy(desc(proverbs.createdAt));
+      log.debug(data, 'Found Proverbs');
       return data;
     },
-    updateUser: async function (id, data) {
+    update: async function (id, data) {
       data.updatedAt = new Date();
       const [updated] = await db
-        .update(users)
+        .update(proverbs)
         .set(data)
-        .where(eq(users.id, id))
+        .where(eq(proverbs.id, id))
         .returning();
-      log.debug(updated, `Updated user by id ${id}`);
+      log.debug(updated, `Updated Proverb id ${id}`);
       return updated;
     },
   };
