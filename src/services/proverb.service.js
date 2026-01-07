@@ -52,6 +52,10 @@ export const getProverbService = (cnf, log) => {
       const data = await daoProverb.query();
       return data;
     },
+    getRandomProverb: async (qry) => {
+      const random = await daoProverb.queryRandom(qry);
+      return random;
+    },
     updateProverb: async (id, payload) => {
       const found = await daoProverb.findById(id);
       if (!found)

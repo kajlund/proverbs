@@ -22,6 +22,14 @@ export const proverbSchema = z.strictObject({
   tags: z.string().trim().optional(),
 });
 
+export const qryLngCatSchema = z.strictObject({
+  lang: z.enum(['eng', 'swe', 'fin']).optional().default('eng'),
+  category: z
+    .enum(['IT', 'Misc.', 'Science', 'Secular'])
+    .optional()
+    .default('IT'),
+});
+
 export function validateIdParam(req, res, next) {
   try {
     const id = cuidSchema.parse(req.params?.id);
@@ -40,6 +48,17 @@ export function validateBody(schema) {
       return next(new BadRequestError('Faulty body data', vld.error));
     req.locals ??= {};
     req.locals.payload = vld.data;
+    next();
+  };
+}
+
+export function validateQuery(schema) {
+  return function (req, res, next) {
+    const vld = schema.safeParse(req.query);
+    if (!vld.success)
+      return next(new BadRequestError('Faulty query params', vld.error));
+    req.locals ??= {};
+    req.locals.query = vld.data;
     next();
   };
 }

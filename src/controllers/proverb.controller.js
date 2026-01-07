@@ -34,6 +34,14 @@ export function getProverbController(cnf, log) {
         .status(codes.OK)
         .json(new ApiResponse(codes.OK, list, 'Proverb list'));
     }),
+    getRandomProverb: asyncHandler(async (req, res) => {
+      const { query } = req.locals;
+      log.info(query, 'Fetching random:');
+      const proverb = await svcProverb.getRandomProverb(query);
+      res
+        .status(codes.OK)
+        .json(new ApiResponse(codes.OK, proverb, 'Fetched Random Proverb'));
+    }),
     updateProverb: asyncHandler(async (req, res) => {
       const { id, payload } = req.locals;
       const updated = await svcProverb.updateProverb(id, payload);

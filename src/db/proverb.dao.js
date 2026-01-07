@@ -1,4 +1,4 @@
-import { desc, eq } from 'drizzle-orm';
+import { and, desc, eq } from 'drizzle-orm';
 
 import db from './index.js';
 import { authors, categories, proverbs } from './schemas.js';
@@ -67,6 +67,42 @@ export function getProverbDAO(log) {
         .orderBy(desc(proverbs.createdAt));
       log.debug(data, 'Found Proverbs');
       return data;
+    },
+    queryRandom: async function (qry) {
+      const { lang, category } = qry;
+      const ids = await db
+        .select({
+          id: proverbs.id,
+          cat: categories.name,
+          language: proverbs.lang,
+        })
+        .from(proverbs)
+        .innerJoin(categories, eq(proverbs.categoryId, categories.id))
+        .where(and(eq(proverbs.lang, lang), eq(categories.name, category)));
+
+      const rnd = ids[Math.floor(Math.random() * ids.length)];
+      const [found] = await db
+        .select({
+          id: proverbs.id,
+          title: proverbs.title,
+          authorId: proverbs.authorId,
+          author: authors.name,
+          content: proverbs.content,
+          description: proverbs.description,
+          lang: proverbs.lang,
+          categoryId: proverbs.categoryId,
+          category: categories.name,
+          tags: proverbs.tags,
+          createdAt: proverbs.createdAt,
+          updatedAt: proverbs.updatedAt,
+        })
+        .from(proverbs)
+        .innerJoin(authors, eq(proverbs.authorId, authors.id))
+        .innerJoin(categories, eq(proverbs.categoryId, categories.id))
+        .where(eq(proverbs.id, rnd.id))
+        .limit(1);
+      log.debug(found, `Found Random Proverb id ${found.id}`);
+      return found;
     },
     update: async function (id, data) {
       data.updatedAt = new Date();
