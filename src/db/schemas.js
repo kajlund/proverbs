@@ -1,45 +1,43 @@
 import { createId } from '@paralleldrive/cuid2';
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { sql } from 'drizzle-orm';
+import { pgTable, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
 const timestamps = {
-  createdAt: text()
+  createdAt: timestamp('createdAt', { withTimezone: true, mode: 'string' })
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`),
-  updatedAt: text()
+    .defaultNow(),
+  updatedAt: timestamp('updatedAt', { withTimezone: true, mode: 'string' })
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`)
-    .$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
+    .defaultNow(),
 };
 
-export const authors = sqliteTable('authors', {
-  id: text()
+export const authors = pgTable('authors', {
+  id: varchar()
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text('aut_name').notNull().unique(),
+  name: varchar().notNull().unique(),
   ...timestamps,
 });
 
-export const categories = sqliteTable('categories', {
-  id: text()
+export const categories = pgTable('categories', {
+  id: varchar()
     .primaryKey()
     .$defaultFn(() => createId()),
-  name: text().notNull().unique(),
+  name: varchar().notNull().unique(),
   ...timestamps,
 });
 
-export const proverbs = sqliteTable('proverbs', {
-  id: text()
+export const proverbs = pgTable('proverbs', {
+  id: varchar()
     .primaryKey()
     .$defaultFn(() => createId()),
-  title: text().notNull().default(''),
-  authorId: text()
+  title: varchar().notNull().default(''),
+  authorId: varchar()
     .notNull()
     .references(() => authors.id),
   content: text().notNull().default(''),
   description: text().notNull().default(''),
-  lang: text().notNull().default('eng'),
-  categoryId: text()
+  lang: varchar().notNull().default('eng'),
+  categoryId: varchar()
     .notNull()
     .references(() => categories.id),
   tags: text().notNull().default(''),
