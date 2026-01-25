@@ -16,6 +16,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            # Load NVM and Node into this specific session
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             git config --global --add safe.directory /var/www/proverbs
             cd /var/www/proverbs || { echo "Folder not found"; exit 1; }
             git fetch --all
