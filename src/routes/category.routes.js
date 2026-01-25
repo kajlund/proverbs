@@ -1,5 +1,5 @@
 import { getCategoryController } from '../controllers/category.controller.js';
-import { getAuthMiddleware } from '../middleware/auth.middleware.js';
+// import { getAuthMiddleware } from '../middleware/auth.middleware.js';
 import {
   categorySchema,
   validateBody,
@@ -8,13 +8,13 @@ import {
 
 export function getCategoryRoutes(cnf, log) {
   const hnd = getCategoryController(cnf, log);
-  const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
-  const isAdmin = checkRole('ADMIN');
+  // const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
+  // const isAdmin = checkRole('ADMIN');
 
   return {
     group: {
       prefix: '/api/v1/categories',
-      middleware: [isAuthenticated, isAdmin],
+      middleware: [], // isAuthenticated, isAdmin
     },
     routes: [
       {
