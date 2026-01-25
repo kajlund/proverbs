@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import 'dotenv/config';
+
 import { eq } from 'drizzle-orm';
 
 import { getConfig } from '../src/utils/config.js';

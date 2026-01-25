@@ -4,7 +4,7 @@
   "description": "Proverbs REST API",
   "main": "src/index.js",
   "scripts": {
-    "dev": "node --watch --env-file=.env.development ./src/index.js",
+    "dev": "nodemon ./src/index.js",
     "start": "node ./src/index.js",
     "db:import": "node --env-file=.env.development ./scripts/import.js",
     "db:push": "drizzle-kit push",
@@ -43,6 +43,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.5.0",
+    "nodemon": "^3.1.11",
     "prettier": "^3.6.2"
   }
 }
