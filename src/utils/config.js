@@ -21,7 +21,7 @@ const configSchema = z.strictObject({
   dbUrl: z.string().trim(),
   dbAuthToken: z.string().trim().optional().default(''),
   accessTokenSecret: z.string().min(30),
-  corsOrigin: z.array(z.string()).optional().default(['http://localhost:3005']),
+  corsOrigin: z.array(z.string()).optional().default(['http://localhost:3001']),
 });
 
 function getEnvConfig() {
@@ -31,7 +31,6 @@ function getEnvConfig() {
     logLevel: process.env.LOG_LEVEL,
     logHttp: process.env.LOG_HTTP,
     dbUrl: process.env.DATABASE_URL,
-    dbAuthToken: process.env.DATABASE_AUTH_TOKEN,
     accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
     corsOrigin: process.env.CORS_ORIGIN?.split(','),
   };
