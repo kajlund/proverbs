@@ -19,7 +19,6 @@ const configSchema = z.strictObject({
     .default('info'),
   logHttp: z.coerce.boolean().optional().default(false),
   dbUrl: z.string().trim(),
-  dbAuthToken: z.string().trim().optional().default(''),
   accessTokenSecret: z.string().min(30),
   corsOrigin: z.array(z.string()).optional().default(['http://localhost:3001']),
 });
