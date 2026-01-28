@@ -13,77 +13,103 @@ import { getLogger } from '../src/utils/logger.js';
 const cnf = getConfig();
 const log = getLogger(cnf);
 
-async function importAuthors(items) {
-  for (const item of items) {
-    const exists = await db
+async function importAuthors() {
+  const data = readFileSync(
+    join(process.cwd(), 'scripts/export_authors.json'),
+    'utf-8',
+  );
+  const arr = JSON.parse(data);
+
+  for (const item of arr) {
+    const [found] = await db
       .select()
       .from(authors)
-      .where(eq(authors.name, item.author))
-      .get();
+      .where(eq(authors.id, item.id))
+      .limit(1);
 
-    if (!exists) {
+    if (!found) {
       await db.insert(authors).values({
-        name: item.author,
+        id: item.id,
+        name: item.name,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
       });
     }
   }
 }
 
-async function importCategories(items) {
-  for (const item of items) {
-    const exists = await db
+async function importCategories() {
+  const data = readFileSync(
+    join(process.cwd(), 'scripts/export_categories.json'),
+    'utf-8',
+  );
+  const arr = JSON.parse(data);
+
+  for (const item of arr) {
+    const [found] = await db
       .select()
       .from(categories)
-      .where(eq(categories.name, item.category))
-      .get();
+      .where(eq(categories.id, item.id))
+      .limit(1);
 
-    if (!exists) {
+    if (!found) {
       await db.insert(categories).values({
-        name: item.category,
+        id: item.id,
+        name: item.name,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
       });
     }
   }
 }
 
-async function importProverbs(items) {
-  for (const item of items) {
-    const author = await db
-      .select()
-      .from(authors)
-      .where(eq(authors.name, item.author))
-      .get();
+async function importProverbs() {
+  const data = readFileSync(
+    join(process.cwd(), 'scripts/export_proverbs.json'),
+    'utf-8',
+  );
+  const arr = JSON.parse(data);
 
-    const category = await db
+  for (const item of arr) {
+    const [found] = await db
       .select()
-      .from(categories)
-      .where(eq(categories.name, item.category))
-      .get();
+      .from(proverbs)
+      .where(eq(proverbs.id, item.id))
+      .limit(1);
 
-    await db.insert(proverbs).values({
-      title: item.title,
-      authorId: author.id,
-      content: item.content,
-      description: item.description,
-      lang: item.lang,
-      categoryId: category.id,
-      tags: item.tags.join(','),
-    });
+    if (!found) {
+      await db.insert(proverbs).values({
+        id: item.id,
+        title: item.title,
+        authorId: item.authorId,
+        content: item.content,
+        description: item.description,
+        lang: item.lang,
+        categoryId: item.categoryId,
+        tags: item.tags,
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      });
+    }
   }
 }
 
 async function importData() {
   log.info('Importing data');
-  const data = readFileSync(
-    join(process.cwd(), 'scripts/proverbs.json'),
-    'utf-8',
-  );
-  const dataArray = JSON.parse(data);
-  await importAuthors(dataArray);
+  await importAuthors();
   log.info('Imported authors');
-  await importCategories(dataArray);
+  await importCategories();
   log.info('Imported categories');
-  await importProverbs(dataArray);
+  await importProverbs();
   log.info('Imported proverbs');
 }
 
-importData().catch((err) => log.error(err));
+importData()
+  .then(() => {
+    log.info('Import completed successfully');
+    process.exit(0);
+  })
+  .catch((err) => {
+    log.error(err);
+    process.exit(1);
+  });
