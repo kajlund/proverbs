@@ -19,14 +19,14 @@ export function getCategoryController(cnf, log) {
       const deleted = await svcCategory.deleteCategory(id);
       res
         .status(codes.OK)
-        .json(new ApiResponse(codes.OK, deleted, 'Deleted Category'));
+        .json(new ApiResponse(codes.OK, deleted, `Deleted Category: ${id}`));
     }),
     findCategoryById: asyncHandler(async (req, res) => {
       const { id } = req.locals;
       const category = await svcCategory.findCategoryById(id);
       res
         .status(codes.OK)
-        .json(new ApiResponse(codes.OK, category, 'Found Author'));
+        .json(new ApiResponse(codes.OK, category, `Found Category id: ${id}`));
     }),
     getCategoryList: asyncHandler(async (req, res) => {
       const categories = await svcCategory.getCategoryList();

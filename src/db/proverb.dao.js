@@ -6,7 +6,7 @@ import { authors, categories, proverbs } from './schemas.js';
 export function getProverbDAO(log) {
   return {
     create: async function (data) {
-      const time = new Date();
+      const time = new Date().toISOString();
       data.createdAt = time;
       data.updatedAt = time;
       const [newProverb] = await db.insert(proverbs).values(data).returning();
@@ -105,7 +105,7 @@ export function getProverbDAO(log) {
       return found;
     },
     update: async function (id, data) {
-      data.updatedAt = new Date();
+      data.updatedAt = new Date().toISOString();
       const [updated] = await db
         .update(proverbs)
         .set(data)

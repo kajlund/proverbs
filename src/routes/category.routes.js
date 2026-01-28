@@ -1,5 +1,5 @@
 import { getCategoryController } from '../controllers/category.controller.js';
-// import { getAuthMiddleware } from '../middleware/auth.middleware.js';
+import { getAuthMiddleware } from '../middleware/auth.middleware.js';
 import {
   categorySchema,
   validateBody,
@@ -8,13 +8,13 @@ import {
 
 export function getCategoryRoutes(cnf, log) {
   const hnd = getCategoryController(cnf, log);
-  // const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
-  // const isAdmin = checkRole('ADMIN');
+  const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
+  const isAdmin = checkRole('ADMIN');
 
   return {
     group: {
       prefix: '/api/v1/categories',
-      middleware: [], // isAuthenticated, isAdmin
+      middleware: [],
     },
     routes: [
       {
@@ -32,19 +32,24 @@ export function getCategoryRoutes(cnf, log) {
       {
         method: 'post',
         path: '/',
-        middleware: [validateBody(categorySchema)],
+        middleware: [isAuthenticated, isAdmin, validateBody(categorySchema)],
         handler: hnd.createCategory,
       },
       {
         method: 'put',
         path: '/:id',
-        middleware: [validateIdParam, validateBody(categorySchema)],
+        middleware: [
+          isAuthenticated,
+          isAdmin,
+          validateIdParam,
+          validateBody(categorySchema),
+        ],
         handler: hnd.updateCategory,
       },
       {
         method: 'delete',
         path: '/:id',
-        middleware: [validateIdParam],
+        middleware: [isAuthenticated, isAdmin, validateIdParam],
         handler: hnd.deleteCategory,
       },
     ],

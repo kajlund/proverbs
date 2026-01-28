@@ -6,7 +6,7 @@ import { categories } from './schemas.js';
 export function getCategoryDAO(log) {
   return {
     create: async function (data) {
-      const time = new Date();
+      const time = new Date().toISOString();
       data.createdAt = time;
       data.updatedAt = time;
       const [created] = await db.insert(categories).values(data).returning();
@@ -45,7 +45,7 @@ export function getCategoryDAO(log) {
       return data;
     },
     update: async function (id, data) {
-      data.updatedAt = new Date();
+      data.updatedAt = new Date().toISOString();
       const [updated] = await db
         .update(categories)
         .set(data)

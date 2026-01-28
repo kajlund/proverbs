@@ -6,7 +6,7 @@ import { authors } from './schemas.js';
 export function getAuthorDAO(log) {
   return {
     create: async function (data) {
-      const time = new Date();
+      const time = new Date().toISOString();
       data.createdAt = time;
       data.updatedAt = time;
       const [created] = await db.insert(authors).values(data).returning();
@@ -45,7 +45,7 @@ export function getAuthorDAO(log) {
       return data;
     },
     update: async function (id, data) {
-      data.updatedAt = new Date();
+      data.updatedAt = new Date().toISOString();
       const [updated] = await db
         .update(authors)
         .set(data)

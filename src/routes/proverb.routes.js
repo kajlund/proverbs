@@ -1,5 +1,5 @@
 import { getProverbController } from '../controllers/proverb.controller.js';
-// import { getAuthMiddleware } from '../middleware/auth.middleware.js';
+import { getAuthMiddleware } from '../middleware/auth.middleware.js';
 import {
   proverbSchema,
   qryLngCatSchema,
@@ -10,8 +10,8 @@ import {
 
 export function getProverbRoutes(cnf, log) {
   const hnd = getProverbController(cnf, log);
-  // const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
-  // const isAdmin = checkRole('ADMIN');
+  const { isAuthenticated, checkRole } = getAuthMiddleware(cnf, log);
+  const isAdmin = checkRole('ADMIN');
 
   return {
     group: {
@@ -22,7 +22,7 @@ export function getProverbRoutes(cnf, log) {
       {
         method: 'get',
         path: '/',
-        middleware: [], //isAuthenticated, isAdmin
+        middleware: [],
         handler: hnd.getProverbList,
       },
       {
@@ -34,21 +34,21 @@ export function getProverbRoutes(cnf, log) {
       {
         method: 'get',
         path: '/:id',
-        middleware: [], //isAuthenticated, isAdmin, validateIdParam
+        middleware: [validateIdParam],
         handler: hnd.findProverbById,
       },
       {
         method: 'post',
         path: '/',
-        middleware: [validateBody(proverbSchema)], //isAuthenticated, isAdmin,
+        middleware: [isAuthenticated, isAdmin, validateBody(proverbSchema)],
         handler: hnd.createProverb,
       },
       {
         method: 'put',
         path: '/:id',
         middleware: [
-          // isAuthenticated,
-          // isAdmin,
+          isAuthenticated,
+          isAdmin,
           validateIdParam,
           validateBody(proverbSchema),
         ],
@@ -57,7 +57,7 @@ export function getProverbRoutes(cnf, log) {
       {
         method: 'delete',
         path: '/:id',
-        middleware: [validateIdParam], //isAuthenticated, isAdmin,
+        middleware: [isAuthenticated, isAdmin, validateIdParam],
         handler: hnd.deleteProverb,
       },
     ],
