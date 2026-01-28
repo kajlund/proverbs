@@ -1,4 +1,4 @@
-name: Deploy Site
+name: Deploy Proverbs Application
 on:
   push:
     branches:
@@ -25,5 +25,5 @@ jobs:
             git reset --hard origin/main
             npm install
             npx drizzle-kit push
-            pm2 startOrRestart /var/www/ecosystem.config.cjs --env production
+            pm2 restart /var/www/ecosystem.config.cjs --only proverbs --update-env
             pm2 save
