@@ -60,4 +60,17 @@ export const ProverbsAPI = {
       credentials: 'include',
     });
   },
+  async deleteAuthor(id) {
+    return fetch(`${BASE_URL}/authors/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+  },
+
+  async deleteCategory(id) {
+    return fetch(`${BASE_URL}/categories/${id}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+  },
 };
