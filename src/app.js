@@ -1,3 +1,6 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -8,6 +11,8 @@ import httpLogger from 'pino-http';
 import { getRouter } from './routes/index.js';
 import { getErrorHandler } from './middleware/error.handler.js';
 import { getNotFoundHandler } from './middleware/notfound.handler.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export function getApp(cnf, log) {
   const app = express();
@@ -43,8 +48,19 @@ export function getApp(cnf, log) {
     app.use(httpLogger({ logger: log }));
   }
 
-  // Add routes
+  // Add API routes
   app.use(getRouter(cnf, log));
+
+  const publicPath = path.join(__dirname, '..', 'public');
+  app.use(express.static(publicPath));
+  // The Catch-all route
+  app.use((req, res, next) => {
+    // We only want to fallback for GET requests (page loads)
+    if (req.method === 'GET' && req.accepts('html')) {
+      return res.sendFile(path.join(publicPath, 'index.html'));
+    }
+    next(); // Let Express handle 404s for JSON/API requests
+  });
 
   // Add 404 handler
   app.use(getNotFoundHandler());

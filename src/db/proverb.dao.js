@@ -65,7 +65,6 @@ export function getProverbDAO(log) {
         .innerJoin(authors, eq(proverbs.authorId, authors.id))
         .innerJoin(categories, eq(proverbs.categoryId, categories.id))
         .orderBy(desc(proverbs.createdAt));
-      log.debug(data, 'Found Proverbs');
       return data;
     },
     queryRandom: async function (qry) {

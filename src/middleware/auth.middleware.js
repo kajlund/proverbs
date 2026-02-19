@@ -19,7 +19,7 @@ export function getAuthMiddleware(cnf, log) {
     isAuthenticated: asyncHandler(async (req, res, next) => {
       // Ensure we have a token or throw unauhtorized error
       const token =
-        req.cookies?.accessToken ||
+        req.cookies?.token ||
         req.header('Authorization')?.replace('Bearer ', '');
       if (!token) throw new UnauthorizedError('Invalid creadentials');
       // Verify token or throw unauhtorized error
