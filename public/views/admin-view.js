@@ -4,6 +4,8 @@ import '../components/proverb-table.js';
 import '../components/admin-controls.js';
 import '../components/quick-add.js';
 import '../components/proverb-modal.js';
+import '../components/confirm-modal.js';
+import '../components/toast-container.js';
 import { themeStyles } from '../styles/theme.js';
 
 export class AdminView extends LitElement {
@@ -16,8 +18,9 @@ export class AdminView extends LitElement {
     currentProverb: { type: Object },
     editingId: { type: String },
     filterLang: { type: String },
-    toastMsg: { type: String },
     searchQuery: { type: String },
+    isModalOpen: { type: Boolean },
+    confirmData: { type: Object },
   };
 
   static styles = [
@@ -59,107 +62,6 @@ export class AdminView extends LitElement {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
       }
 
-      /*
-      // form {
-      //   display: flex;
-      //   flex-direction: column;
-      //   gap: 1rem;
-      // }
-
-      // textarea {
-      //   height: 100px;
-      //   background: var(--bg-dark);
-      //   color: white;
-      //   border: 1px solid rgba(255, 255, 255, 0.1);
-      //   border-radius: 8px;
-      //   padding: 0.8rem 2.5rem 0.8rem 1rem;
-      //   font-size: 0.95rem;
-      // }
-
-      // input {
-      //   background: var(--bg-dark);
-      //   color: white;
-      //   border: 1px solid rgba(255, 255, 255, 0.1);
-      //   border-radius: 8px;
-      //   padding: 0.8rem 2.5rem 0.8rem 1rem;
-      //   font-size: 0.95rem;
-      // }
-
-      // label {
-      //   font-size: 0.8rem;
-      //   color: var(--accent);
-      //   text-transform: uppercase;
-      // }
-    */
-      .modal-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      select {
-        appearance: none; /* Removes the default OS arrow */
-        background-color: var(--bg-dark);
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 1rem center;
-        background-size: 1em;
-        color: var(--text-main);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        padding: 0.8rem 2.5rem 0.8rem 1rem;
-        font-family: var(--font-ui);
-        font-size: 0.95rem;
-        cursor: pointer;
-        transition:
-          border-color 0.3s,
-          box-shadow 0.3s;
-        width: 100%;
-      }
-
-      select:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-      }
-
-      select:hover {
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-
-      /* Style the dropdown menu itself (limited browser support for some parts, but colors work) */
-      select option {
-        background-color: var(--bg-card);
-        color: var(--text-main);
-        padding: 1rem;
-      }
-
-      .toast {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        background: var(--accent);
-        color: var(--bg-dark);
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-weight: 600;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        animation: slideIn 0.3s ease-out;
-        z-index: 1000;
-      }
-
-      @keyframes slideIn {
-        from {
-          transform: translateY(100px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
       .table-controls {
         display: flex;
         justify-content: space-between;
@@ -189,6 +91,13 @@ export class AdminView extends LitElement {
     this.currentView = 'proverbs';
     this.filterLang = 'all';
     this.searchQuery = '';
+    this.isModalOpen = false;
+    this.toasts = [];
+    this.confirmData = {
+      open: false,
+      title: '',
+      message: '',
+    };
   }
 
   async connectedCallback() {
@@ -247,6 +156,7 @@ export class AdminView extends LitElement {
         await this.loadData();
         this.showToast(
           this.editingId ? 'Proverb updated!' : 'Proverb created!',
+          'success',
         );
       } else {
         const errorData = await response.json();
@@ -257,66 +167,69 @@ export class AdminView extends LitElement {
     }
   }
 
-  formatTags(tagString) {
-    if (!tagString || typeof tagString !== 'string') return [];
-    return tagString
-      .split(',')
-      .map((t) => t.trim())
-      .filter((t) => t !== '');
-  }
-
-  showToast(msg) {
-    this.toastMsg = msg;
-    setTimeout(() => {
-      this.toastMsg = '';
-    }, 3000);
+  askConfirm(title, message, onConfirm) {
+    this.confirmData = { open: true, title, message, onConfirm };
   }
 
   async deleteItem(id) {
-    if (confirm('Are you sure you want to delete this proverb?')) {
-      const success = await ProverbsAPI.deleteProverb(id);
-      if (success) {
-        this.loadData(); // Re-fetch to update the UI
-        // Optional: document.getElementById('globalToast').show('Deleted!', 'success');
-      }
-    }
+    this.askConfirm(
+      'Delete Proverb?',
+      'This action cannot be undone.',
+      async () => {
+        const res = await ProverbsAPI.deleteProverb(id);
+        if (res.ok) {
+          this.loadData();
+          this.showToast('Proverb deleted', 'success');
+        } else {
+          const err = await res.json();
+          const msg = `Failed to delete proverb: ${err.message || ' Unknown error'}`;
+          this.showToast(msg, 'error');
+        }
+      },
+    );
   }
 
   async deleteAuthor(id) {
-    if (!confirm('Are you sure? This will fail if the author has proverbs.'))
-      return;
-
-    try {
-      const res = await ProverbsAPI.deleteAuthor(id);
-      if (res.ok) {
-        await this.loadData();
-        this.showToast('Author removed');
-      } else {
-        const err = await res.json();
-        // If the DB returns a foreign key constraint error
-        alert(
-          `Cannot delete: ${err.message || 'This author is still linked to proverbs.'}`,
-        );
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    this.askConfirm(
+      'Delete Author?',
+      'This action cannot be undone.',
+      async () => {
+        const res = await ProverbsAPI.deleteAuthor(id);
+        if (res.ok) {
+          await this.loadData();
+          this.showToast('Author removed', 'success');
+        } else {
+          const err = await res.json();
+          const msg = `Cannot delete: ${err.message || 'This author is still linked to proverbs.'}`;
+          this.showToast(msg, 'error');
+        }
+      },
+    );
   }
 
   async deleteCategory(id) {
-    if (!confirm('Delete this category?')) return;
+    this.askConfirm(
+      'Delete Category?',
+      'This action cannot be undone.',
+      async () => {
+        const res = await ProverbsAPI.deleteCategory(id);
+        if (res.ok) {
+          await this.loadData();
+          this.showToast('Category removed', 'success');
+        } else {
+          const err = await res.json();
+          const msg = `Cannot delete: ${err.message || ' This categoryr is still linked to proverbs.'}`;
+          this.showToast(msg, 'error');
+        }
+      },
+    );
+  }
 
-    try {
-      const res = await ProverbsAPI.deleteCategory(id);
-      if (res.ok) {
-        await this.loadData();
-        this.showToast('Category removed');
-      } else {
-        alert('Cannot delete category while it has proverbs assigned to it.');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  cancelEdit() {
+    this.isModalOpen = false;
+    this.currentProverb = null;
+    this.editingId = null;
+    this.showToast('Edit cancelled', 'info');
   }
 
   getFilteredProverbs() {
@@ -333,6 +246,10 @@ export class AdminView extends LitElement {
 
       return matchesLang && matchesSearch;
     });
+  }
+
+  showToast(msg, type = 'info') {
+    this.shadowRoot.getElementById('toaster').add(msg, type);
   }
 
   render() {
@@ -374,16 +291,32 @@ export class AdminView extends LitElement {
         .authors=${this.authors}
         .categories=${this.categories}
         @save=${(e) => this.saveProverb(e.detail)}
-        @close=${() => (this.isModalOpen = false)}
+        @cancel=${() => this.cancelEdit()}
       ></proverb-modal>
 
-      ${this.toastMsg ? html`<div class="toast">${this.toastMsg}</div>` : ''}
+      <toast-container id="toaster"></toast-container>
+
+      <confirm-modal
+        .isOpen=${this.confirmData.open}
+        .title=${this.confirmData.title}
+        .message=${this.confirmData.message}
+        @cancel=${() =>
+          (this.confirmData = { ...this.confirmData, open: false })}
+        @confirm=${async () => {
+          if (this.confirmData.onConfirm) {
+            try {
+              await this.confirmData.onConfirm();
+            } catch (error) {
+              console.error('Error in confirm callback:', error);
+            }
+          }
+          this.confirmData = { ...this.confirmData, open: false };
+        }}
+      ></confirm-modal>
     `;
   }
 
   renderActiveContent() {
-    // IMPORTANT: Ensure this function always returns an 'html' template
-
     switch (this.currentView) {
       case 'authors':
         return html`

@@ -62,14 +62,103 @@ export const themeStyles = css`
     border-radius: 4px;
   }
 
-  /* Shared Form Labels */
+  .toast-container {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 9999;
+  }
+
+  .toast {
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease-out;
+    min-width: 250px;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
   label {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 0.5rem;
     margin-top: 1rem;
+  }
+
+  input {
+    background: var(--bg-dark);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  textarea {
+    height: 100px;
+    background: var(--bg-dark);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  select {
+    appearance: none; /* Removes the default OS arrow */
+    background-color: var(--bg-dark);
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    color: var(--text-main);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+    width: 100%;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  }
+
+  select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Style the dropdown menu itself (limited browser support for some parts, but colors work) */
+  select option {
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    padding: 1rem;
   }
 `;

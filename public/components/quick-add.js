@@ -1,4 +1,5 @@
 import { LitElement, html, css } from '../lit-core.min.js';
+import { themeStyles } from '../styles/theme.js';
 
 export class QuickAdd extends LitElement {
   static properties = {
@@ -6,29 +7,32 @@ export class QuickAdd extends LitElement {
     endpoint: { type: String },
   };
 
-  static styles = css`
-    div {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    input {
-      background: var(--bg-dark);
-      color: white;
-      border: 1px solid #333;
-      padding: 0.4rem;
-      border-radius: 4px;
-      flex: 1;
-    }
-    button {
-      background: var(--accent);
-      border: none;
-      padding: 0.4rem 0.8rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-  `;
+  static styles = [
+    themeStyles,
+    css`
+      div {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      input {
+        background: var(--bg-dark);
+        color: white;
+        border: 1px solid #333;
+        padding: 0.4rem;
+        border-radius: 4px;
+        flex: 1;
+      }
+      button {
+        background: var(--accent);
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+    `,
+  ];
 
   async submit() {
     const input = this.shadowRoot.querySelector('input');

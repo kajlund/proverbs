@@ -36,8 +36,7 @@ export class ProverbModal extends LitElement {
         text-transform: uppercase;
       }
       input,
-      textarea,
-      select {
+      textarea {
         background: var(--bg-dark);
         color: white;
         border: 1px solid #333;
@@ -82,17 +81,18 @@ export class ProverbModal extends LitElement {
     );
   }
 
-  handleCancel() {
+  handleCancel(e) {
+    e.preventDefault();
     this.isOpen = false;
-    // Notify the parent so it stays in sync
+    // Explicitly signal that the user cancelled editing
     this.dispatchEvent(
-      new CustomEvent('close', { bubbles: true, composed: true }),
+      new CustomEvent('cancel', { bubbles: true, composed: true }),
     );
   }
 
   render() {
     return html`
-      <dialog @close=${this.handleCancel}>
+      <dialog>
         <form @submit=${this.handleSave}>
           <h2>${this.proverb?.id ? 'Edit Proverb' : 'New Proverb'}</h2>
 
