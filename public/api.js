@@ -39,9 +39,9 @@ export const ProverbsAPI = {
     return response.data;
   },
 
-  async fetchAllAdmin() {
-    const res = await fetch(`${BASE_URL}/proverbs`);
-    if (!res.ok) throw new Error('Unauthorized');
+  async getRandom() {
+    const res = await fetch(`${BASE_URL}/proverbs/random`);
+    if (!res.ok) throw new Error('Failed to fetch random proverb');
     const response = await res.json();
     return response.data;
   },
