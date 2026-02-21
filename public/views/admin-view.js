@@ -129,6 +129,7 @@ export class AdminView extends LitElement {
       content: '',
       authorId: '',
       categoryId: '',
+      lang: 'eng',
       tags: '',
     };
     this.isModalOpen = true;
@@ -233,16 +234,19 @@ export class AdminView extends LitElement {
   }
 
   getFilteredProverbs() {
+    const q = (this.searchQuery ?? '').toLowerCase().trim();
     return this.proverbs.filter((p) => {
       // 1. Language Filter
       const matchesLang =
         this.filterLang === 'all' || p.lang === this.filterLang;
 
-      // 2. Search Filter (checks title, content, and author name)
+      // 2. Search Filter (checks title, content, author, and category)
       const matchesSearch =
-        p.title?.toLowerCase().includes(this.searchQuery) ||
-        p.content?.toLowerCase().includes(this.searchQuery) ||
-        p.author?.toLowerCase().includes(this.searchQuery);
+        !q ||
+        p.title?.toLowerCase().includes(q) ||
+        p.content?.toLowerCase().includes(q) ||
+        p.author?.toLowerCase().includes(q) ||
+        p.category?.toLowerCase().includes(q);
 
       return matchesLang && matchesSearch;
     });

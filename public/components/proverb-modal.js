@@ -53,14 +53,34 @@ export class ProverbModal extends LitElement {
 
   // Manual trigger to open/close via the native API
   updated(changedProperties) {
-    // Check if 'isOpen' was the property that changed
     if (changedProperties.has('isOpen')) {
       const dialog = this.shadowRoot.querySelector('dialog');
       if (this.isOpen) {
         dialog.showModal();
+        // Add mode: explicitly clear form to avoid stale values from prior edits
+        if (!this.proverb?.id) {
+          requestAnimationFrame(() => this._clearFormForAdd());
+        }
       } else {
         dialog.close();
       }
+    }
+  }
+
+  _clearFormForAdd() {
+    const form = this.shadowRoot?.querySelector('form');
+    if (!form) return;
+    const defaults = {
+      title: '',
+      content: '',
+      authorId: '',
+      categoryId: '',
+      lang: 'eng',
+      tags: '',
+    };
+    for (const [name, value] of Object.entries(defaults)) {
+      const el = form.elements[name];
+      if (el) el.value = value;
     }
   }
 
@@ -109,9 +129,10 @@ export class ProverbModal extends LitElement {
           <label>Author</label>
           <select
             name="authorId"
-            .value=${this.proverb?.authorId || ''}
+            .value=${this.proverb?.authorId ?? ''}
             required
           >
+            <option value="" disabled>Select author...</option>
             ${this.authors?.map(
               (a) =>
                 html`<option
@@ -126,9 +147,10 @@ export class ProverbModal extends LitElement {
           <label>Category</label>
           <select
             name="categoryId"
-            .value=${this.proverb?.categoryId || ''}
+            .value=${this.proverb?.categoryId ?? ''}
             required
           >
+            <option value="" disabled>Select category...</option>
             ${this.categories?.map(
               (c) =>
                 html`<option
