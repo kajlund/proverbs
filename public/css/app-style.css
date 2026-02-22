@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);
@@ -27,35 +31,9 @@ body {
   background-attachment: fixed;
 }
 
-nav {
+/* Layout: app-shell fills body */
+app-shell {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-nav a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: color 0.3s;
-}
-
-nav a:hover,
-nav a[active] {
-  color: var(--accent);
-}
-
-#outlet {
+  flex-direction: column;
   flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  box-sizing: border-box;
 }

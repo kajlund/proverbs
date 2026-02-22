@@ -81,6 +81,27 @@ export class AdminView extends LitElement {
           gap: 1rem;
         }
       }
+
+      .loading-state {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        color: var(--text-muted);
+      }
+
+      .loading-spinner {
+        width: 32px;
+        height: 32px;
+        border: 3px solid rgba(255, 255, 255, 0.1);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: admin-spin 0.8s linear infinite;
+      }
+
+      @keyframes admin-spin {
+        to { transform: rotate(360deg); }
+      }
     `,
   ];
 
@@ -258,6 +279,14 @@ export class AdminView extends LitElement {
   }
 
   render() {
+    if (this.loading) {
+      return html`
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+        </div>
+      `;
+    }
+
     return html`
       <div class="admin-header">
         <div class="view-switcher">
