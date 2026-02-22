@@ -2,7 +2,6 @@ import { LitElement, html, css } from '../lit-core.min.js';
 
 export class ProverbTable extends LitElement {
   static properties = {
-    // We use 'items' as a generic name so the table can handle any data array
     items: { type: Array },
     // 'proverbs' or 'simple'
     mode: { type: String },

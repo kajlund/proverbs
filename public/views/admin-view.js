@@ -240,13 +240,14 @@ export class AdminView extends LitElement {
       const matchesLang =
         this.filterLang === 'all' || p.lang === this.filterLang;
 
-      // 2. Search Filter (checks title, content, author, and category)
+      // 2. Search Filter (checks title, content, author, description, and category)
       const matchesSearch =
         !q ||
         p.title?.toLowerCase().includes(q) ||
         p.content?.toLowerCase().includes(q) ||
         p.author?.toLowerCase().includes(q) ||
-        p.category?.toLowerCase().includes(q);
+        p.category?.toLowerCase().includes(q) ||
+        p.description?.toLowerCase().includes(q);
 
       return matchesLang && matchesSearch;
     });

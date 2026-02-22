@@ -30,10 +30,16 @@ export class ProverbModal extends LitElement {
         flex-direction: column;
         gap: 1rem;
       }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
       label {
         font-size: 0.75rem;
         color: var(--accent);
         text-transform: uppercase;
+        margin: 0;
       }
       input,
       textarea {
@@ -73,6 +79,7 @@ export class ProverbModal extends LitElement {
     const defaults = {
       title: '',
       content: '',
+      description: '',
       authorId: '',
       categoryId: '',
       lang: 'eng',
@@ -116,67 +123,87 @@ export class ProverbModal extends LitElement {
         <form @submit=${this.handleSave}>
           <h2>${this.proverb?.id ? 'Edit Proverb' : 'New Proverb'}</h2>
 
-          <label>Title</label>
-          <input name="title" .value=${this.proverb?.title || ''} required />
+          <div class="form-group">
+            <label>Title</label>
+            <input name="title" .value=${this.proverb?.title || ''} required />
+          </div>
 
-          <label>Content</label>
-          <textarea
-            name="content"
-            .value=${this.proverb?.content || ''}
-            required
-          ></textarea>
+          <div class="form-group">
+            <label>Content</label>
+            <textarea
+              name="content"
+              .value=${this.proverb?.content || ''}
+              required
+            ></textarea>
+          </div>
 
-          <label>Author</label>
-          <select
-            name="authorId"
-            .value=${this.proverb?.authorId ?? ''}
-            required
-          >
-            <option value="" disabled>Select author...</option>
-            ${this.authors?.map(
-              (a) =>
-                html`<option
-                  value="${a.id}"
-                  ?selected=${this.proverb?.authorId === a.id}
-                >
-                  ${a.name}
-                </option>`,
-            )}
-          </select>
+          <div class="form-group">
+            <label>Description</label>
+            <input
+              name="description"
+              .value=${this.proverb?.description || ''}
+            />
+          </div>
 
-          <label>Category</label>
-          <select
-            name="categoryId"
-            .value=${this.proverb?.categoryId ?? ''}
-            required
-          >
-            <option value="" disabled>Select category...</option>
-            ${this.categories?.map(
-              (c) =>
-                html`<option
-                  value="${c.id}"
-                  ?selected=${this.proverb?.categoryId === c.id}
-                >
-                  ${c.name}
-                </option>`,
-            )}
-          </select>
+          <div class="form-group">
+            <label>Author</label>
+            <select
+              name="authorId"
+              .value=${this.proverb?.authorId ?? ''}
+              required
+            >
+              <option value="" disabled>Select author...</option>
+              ${this.authors?.map(
+                (a) =>
+                  html`<option
+                    value="${a.id}"
+                    ?selected=${this.proverb?.authorId === a.id}
+                  >
+                    ${a.name}
+                  </option>`,
+              )}
+            </select>
+          </div>
 
-          <label>Language</label>
-          <select name="lang" .value=${this.proverb?.lang || 'eng'} required>
-            <option value="eng" ?selected=${this.proverb?.lang === 'eng'}>
-              English
-            </option>
-            <option value="swe" ?selected=${this.proverb?.lang === 'swe'}>
-              Swedish
-            </option>
-            <option value="fin" ?selected=${this.proverb?.lang === 'fin'}>
-              Finnish
-            </option>
-          </select>
+          <div class="form-group">
+            <label>Category</label>
+            <select
+              name="categoryId"
+              .value=${this.proverb?.categoryId ?? ''}
+              required
+            >
+              <option value="" disabled>Select category...</option>
+              ${this.categories?.map(
+                (c) =>
+                  html`<option
+                    value="${c.id}"
+                    ?selected=${this.proverb?.categoryId === c.id}
+                  >
+                    ${c.name}
+                  </option>`,
+              )}
+            </select>
+          </div>
 
-          <label>Tags (comma separated)</label>
-          <input type="text" name="tags" .value=${this.proverb?.tags || ''} />
+          <div class="form-group">
+            <label>Language</label>
+            <select name="lang" .value=${this.proverb?.lang || 'eng'} required>
+              <option value="eng" ?selected=${this.proverb?.lang === 'eng'}>
+                English
+              </option>
+              <option value="swe" ?selected=${this.proverb?.lang === 'swe'}>
+                Swedish
+              </option>
+              <option value="fin" ?selected=${this.proverb?.lang === 'fin'}>
+                Finnish
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Tags (comma separated)</label>
+            <input type="text" name="tags" .value=${this.proverb?.tags || ''} />
+          </div>
 
           <div class="actions">
             <button type="button" class="btn-ghost" @click=${this.handleCancel}>
