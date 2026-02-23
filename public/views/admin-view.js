@@ -7,6 +7,7 @@ import '../components/proverb-modal.js';
 import '../components/confirm-modal.js';
 import '../components/toast-container.js';
 import { themeStyles } from '../styles/theme.js';
+import { authStore } from '../stores/auth-store.js';
 
 export class AdminView extends LitElement {
   static properties = {
@@ -100,7 +101,9 @@ export class AdminView extends LitElement {
       }
 
       @keyframes admin-spin {
-        to { transform: rotate(360deg); }
+        to {
+          transform: rotate(360deg);
+        }
       }
     `,
   ];
@@ -123,6 +126,11 @@ export class AdminView extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
+    await authStore.checkStatus();
+
+    // re-render to reflect auth status in the UI
+    this.requestUpdate();
+
     this.loadData();
   }
 
@@ -279,6 +287,8 @@ export class AdminView extends LitElement {
   }
 
   render() {
+    const { isAdmin } = authStore;
+
     if (this.loading) {
       return html`
         <div class="loading-state">
@@ -310,7 +320,7 @@ export class AdminView extends LitElement {
           </button>
         </div>
 
-        ${this.currentView === 'proverbs'
+        ${this.currentView === 'proverbs' && isAdmin
           ? html`<button class="btn-primary" @click=${this.openAdd}>
               + New Proverb
             </button>`

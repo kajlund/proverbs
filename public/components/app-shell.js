@@ -1,6 +1,8 @@
 import { LitElement, html, css } from '../lit-core.min.js';
 import { Router } from 'https://unpkg.com/@vaadin/router@1.7.5/dist/vaadin-router.js?module';
 import { routes } from '../config/routes.js';
+import { authStore } from '../stores/auth-store.js';
+import { CONFIG } from '../config.js';
 
 export class AppShell extends LitElement {
   static properties = {
@@ -18,6 +20,7 @@ export class AppShell extends LitElement {
     nav {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 2rem;
       padding: 1.5rem;
       background: rgba(0, 0, 0, 0.2);
@@ -38,6 +41,15 @@ export class AppShell extends LitElement {
     nav a:hover,
     nav a[active] {
       color: var(--accent);
+    }
+    .nav-avatar {
+      display: block;
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 50%;
+      object-fit: cover; /* Prevents stretching if the image isn't square */
+      border: 2px solid var(--accent);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .outlet-wrapper {
@@ -60,6 +72,14 @@ export class AppShell extends LitElement {
   constructor() {
     super();
     this.currentPath = '/';
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    await authStore.checkStatus();
+
+    // re-render to reflect auth status in the UI
+    this.requestUpdate();
   }
 
   firstUpdated() {
@@ -95,22 +115,35 @@ export class AppShell extends LitElement {
   }
 
   render() {
+    const { user } = authStore;
     return html`
       <nav>
         <a
           href="/"
           ?active=${this.currentPath === '/'}
           @click=${(e) => this._handleNavClick(e, '/')}
+          >Home</a
         >
-          Home
-        </a>
-        <a
-          href="/admin"
-          ?active=${this.currentPath === '/admin'}
-          @click=${(e) => this._handleNavClick(e, '/admin')}
-        >
-          Admin Dashboard
-        </a>
+        ${user
+          ? html`
+              <a
+                href="/admin"
+                ?active=${this.currentPath === '/admin'}
+                @click=${(e) => this._handleNavClick(e, '/admin')}
+              >
+                Admin Dashboard
+              </a>
+              <img
+                src="${user.avatar}"
+                alt="${user.alias}"
+                class="nav-avatar"
+              />
+            `
+          : html`
+              <a href="${CONFIG.loginUrl}" class="login-link">
+                Login <span>&rarr;</span>
+              </a>
+            `}
       </nav>
 
       <div class="outlet-wrapper">
