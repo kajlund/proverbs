@@ -5,7 +5,6 @@ import '../components/admin-controls.js';
 import '../components/quick-add.js';
 import '../components/proverb-modal.js';
 import '../components/confirm-modal.js';
-import '../components/toast-container.js';
 import { themeStyles } from '../styles/theme.js';
 import { authStore } from '../stores/auth-store.js';
 
@@ -337,8 +336,6 @@ export class AdminView extends LitElement {
         @save=${(e) => this.saveProverb(e.detail)}
         @cancel=${() => this.cancelEdit()}
       ></proverb-modal>
-
-      <toast-container id="toaster"></toast-container>
 
       <confirm-modal
         .isOpen=${this.confirmData.open}

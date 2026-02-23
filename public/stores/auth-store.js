@@ -30,8 +30,8 @@ class AuthStore {
           isAdmin: this.isAdmin,
           user: this.user,
         };
+        // eslint-disable-next-line no-unused-vars
       } catch (err) {
-        console.error(err);
         this.isLoggedIn = false;
         this.isAdmin = false;
         this.user = null;

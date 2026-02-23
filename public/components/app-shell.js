@@ -1,11 +1,14 @@
 import { LitElement, html, css } from '../lit-core.min.js';
 import { Router } from 'https://unpkg.com/@vaadin/router@1.7.5/dist/vaadin-router.js?module';
-import { routes } from '../config/routes.js';
+import { routes } from '../routes.js';
 import { authStore } from '../stores/auth-store.js';
 import { CONFIG } from '../config.js';
+import './loading-spinner.js';
+import './toast-container.js';
 
 export class AppShell extends LitElement {
   static properties = {
+    isInitializing: { type: Boolean },
     currentPath: { type: String },
   };
 
@@ -71,21 +74,56 @@ export class AppShell extends LitElement {
 
   constructor() {
     super();
+    this.isInitializing = true;
     this.currentPath = '/';
   }
 
   async connectedCallback() {
     super.connectedCallback();
-    await authStore.checkStatus();
 
+    window.addEventListener('show-toast', (e) => this._handleGlobalToast(e));
+
+    // Create a 800ms timer
+    const minTimer = new Promise((resolve) => setTimeout(resolve, 400));
+
+    // Wait for BOTH the auth check and the timer to finish
+    await Promise.all([authStore.checkStatus(), minTimer]);
+
+    this.isInitializing = false;
+
+    await this.updateComplete;
+
+    this.initRouter();
     // re-render to reflect auth status in the UI
     this.requestUpdate();
   }
 
-  firstUpdated() {
-    const outlet = this.shadowRoot.getElementById('outlet');
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('show-toast', this._handleGlobalToast);
+    window.removeEventListener(
+      'vaadin-router-location-changed',
+      this._boundLocationChanged,
+    );
+  }
+
+  _handleGlobalToast(e) {
+    const toaster = this.shadowRoot.querySelector('toast-container');
+    if (toaster) {
+      toaster.add(e.detail.msg, e.detail.type);
+    }
+  }
+
+  initRouter() {
+    const outlet = this.shadowRoot.querySelector('#outlet');
     this.router = new Router(outlet);
     this.router.setRoutes(routes);
+  }
+
+  firstUpdated() {
+    // const outlet = this.shadowRoot.getElementById('outlet');
+    // this.router = new Router(outlet);
+    // this.router.setRoutes(routes);
 
     this._boundLocationChanged = this._onLocationChanged.bind(this);
     window.addEventListener(
@@ -94,14 +132,6 @@ export class AppShell extends LitElement {
     );
 
     this.currentPath = window.location.pathname || '/';
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener(
-      'vaadin-router-location-changed',
-      this._boundLocationChanged,
-    );
   }
 
   _onLocationChanged(event) {
@@ -116,7 +146,14 @@ export class AppShell extends LitElement {
 
   render() {
     const { user } = authStore;
+
+    if (this.isInitializing) {
+      return html`<loading-spinner full-page></loading-spinner>`;
+    }
+
     return html`
+      <toast-container id="toaster"></toast-container>
+
       <nav>
         <a
           href="/"
